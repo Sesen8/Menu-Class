@@ -127,7 +127,7 @@ int main(int argc, char* argv[]){
     returnValue = menu->Run();
     Test(returnValue == EXIT, "Exit Menu", passedTests);
 
-    delete menu;
+    //delete menu;
     stdError.str("");
     stdOutput.str("");
     stdInput.str("");
@@ -188,7 +188,7 @@ int main(int argc, char* argv[]){
     returnValue = menu->Run();
     Test(returnValue == EXIT, "Exit Menu", passedTests);
 
-    delete menu;
+    //delete menu;
     stdError.str("");
     stdOutput.str("");
     stdInput.str("");
@@ -238,7 +238,7 @@ int main(int argc, char* argv[]){
     stdOutput.str("");
     returnValue = menu->Run();
     Test(returnValue == EXIT, "Exit Menu", passedTests);
-    delete menu;
+    //delete menu;
 
 
     return 0;

@@ -29,12 +29,17 @@ Menu::Menu(int numberOfOptions, ostream &output, istream &input, ostream &errorS
     // --------> YOU NEED TO IMPLEMENT THIS METHOD
 
     // This method is incomplete, you still need to write some code here!
+    _menuElements = new MenuElement[numberOfOptions];
+
+
 }
 /**
  * Class destructor, in charge of cleaning the memory
  */
 Menu::~Menu() {
 // --------> YOU NEED TO IMPLEMENT THIS METHOD
+    delete[] _menuElements;
+
 
 }
 /**
@@ -43,8 +48,20 @@ Menu::~Menu() {
  * @return the length of the largest menu option (includes option and text)
  */
 size_t Menu::MaxMenuLength() const {
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
-    return 0;
+
+    size_t maxLength = 0;
+
+    for (size_t i = 0; i < _numberOfOptions; ++i){
+        MenuElement currElement = _menuElements[i];
+        size_t length = currElement.GetMenuText().size() + currElement.GetSelectionOption().size();
+
+        if (length > maxLength ){
+            maxLength = length;
+        }
+
+    }
+
+    return maxLength;
 }
 
 /**
@@ -123,8 +140,20 @@ string Menu::GetTitle() const {
  * @return INVALID_MENU_INDEX if optionNumber is greater than or equal than numberOfOptions, OVERWROTE_OPTION if there was something already in that array position, the optionNumber otherwise
  */
 int Menu::AddMenuOption(unsigned int optionNumber, const string &displayOption, const string &menuOption) {
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
-    return 0;
+
+    if (optionNumber >= _numberOfOptions){
+        return INVALID_MENU_INDEX;
+    }
+
+    size_t pastSize = _menuElements[optionNumber].MenuElementWidth();
+
+    _menuElements[optionNumber].SetMenuElement(displayOption,menuOption);
+
+
+    if (pastSize <= 1){
+        return optionNumber;
+    }
+    return OVERWROTE_OPTION;
 }
 
 /**
@@ -134,8 +163,18 @@ int Menu::AddMenuOption(unsigned int optionNumber, const string &displayOption, 
  * @return INVALID_MENU_INDEX if separatorPosition >= _numberOfOptions, OVERWROTE_OPTION if the slot had something already in that position, separatorPosition otherwise
  */
 int Menu::AddSeparator(unsigned int separatorPosition) {
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
-    return 0;
+    if (separatorPosition >= _numberOfOptions){
+        return INVALID_MENU_INDEX;
+    }
+
+    size_t pastSize = _menuElements[separatorPosition].MenuElementWidth();
+    _menuElements[separatorPosition].SetSeparator(MaxMenuLength(), '-');
+
+    if (pastSize <= 1){
+        return separatorPosition;
+
+    }
+    return OVERWROTE_OPTION;
 }
 
 /**

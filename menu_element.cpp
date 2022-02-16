@@ -51,7 +51,11 @@ MenuElement::MenuElement(size_t length, char separator){
  * @param separator
  */
 void MenuElement::SetSeparator(size_t length, char separator) {
-    _isSeparator = true;
+    _menuText = "";
+    for (size_t i =0; i < length; i++){
+        _menuText += separator;
+        _isSeparator = true;
+    }
 }
 
 /**
