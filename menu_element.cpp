@@ -12,7 +12,10 @@ using std::string;
  * Default constructor, sets _selectionOption and _menuText to empty strings and _isSeparator to false
  */
 MenuElement::MenuElement() {
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
+    _selectionOption = "";
+    _menuText = "";
+    _isSeparator = false;
+
 }
 /**
  * Client program is responsible for setting the length of the selectionOption in such a way
@@ -21,7 +24,9 @@ MenuElement::MenuElement() {
  * @param menuText
  */
 MenuElement::MenuElement(const string &selectionOption, const string &menuText){
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
+    _selectionOption =selectionOption;
+    _menuText = menuText;
+    _isSeparator = false;
 }
 /**
  * Client program should set the length to:
@@ -32,7 +37,12 @@ MenuElement::MenuElement(const string &selectionOption, const string &menuText){
  * @param separator the character that will be used to separate the menus
  */
 MenuElement::MenuElement(size_t length, char separator){
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
+    for (size_t i =0; i < length; i++){
+        _menuText += separator;
+        _isSeparator = true;
+    }
+
+
 }
 /**
  * Sets isSeparator to true to remember that this item is an actual separator. Then the _menuText is going
@@ -41,15 +51,18 @@ MenuElement::MenuElement(size_t length, char separator){
  * @param separator
  */
 void MenuElement::SetSeparator(size_t length, char separator) {
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
+    _isSeparator = true;
 }
+
 /**
  * Sets the menu element, what do you think is going to be the value of _isSeparator?
  * @param selectionOption the option that will be input by the user to select this option
  * @param menuText the text that shows the description of the option
  */
 void MenuElement::SetMenuElement(const string &selectionOption, const string &menuText) {
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
+    _selectionOption =selectionOption;
+    _menuText = menuText;
+    _isSeparator = false;
 }
 
 /**

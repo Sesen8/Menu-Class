@@ -52,7 +52,7 @@ size_t Menu::MaxMenuLength() const {
  * @param errorMessage The error message when the user inputs a string when a number is expected
  */
 void Menu::SetErrorMessage(const string &errorMessage) {
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
+    _errorMessage = errorMessage;
 }
 
 /**
@@ -60,7 +60,7 @@ void Menu::SetErrorMessage(const string &errorMessage) {
  * @param invalidMessage The error message when the user inputs an option that is not in the menu
  */
 void Menu::SetInvalidOption(const string &invalidMessage) {
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
+    _invalidMessage = invalidMessage;
 
 }
 
@@ -69,7 +69,7 @@ void Menu::SetInvalidOption(const string &invalidMessage) {
  * @param type What kind of input the Menu will have, see line 33 to see the available options
  */
 void Menu::SetInputType(InputType type) {
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
+    _inputType = type;
 
 }
 
@@ -78,7 +78,7 @@ void Menu::SetInputType(InputType type) {
  * @param title menu title
  */
 void Menu::SetTitle(const string &title) {
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
+    _menuTitle = title;
 
 }
 
@@ -87,8 +87,7 @@ void Menu::SetTitle(const string &title) {
  * @return The error message when the user inputs a string when a number is expected
  */
 string Menu::GetErrorMessage() const {
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
-    return std::string();
+    return _errorMessage;
 }
 
 /**
@@ -96,8 +95,7 @@ string Menu::GetErrorMessage() const {
  * @return The error message when the user inputs an option that is not in the menu
  */
 string Menu::GetInvalidOption() const {
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
-    return std::string();
+    return _invalidMessage;
 }
 
 /**
@@ -105,8 +103,7 @@ string Menu::GetInvalidOption() const {
  * @return What kind of input the Menu will have, see line 33 to see the available options
  */
 InputType Menu::GetInputType() const {
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
-    return INT;
+    return _inputType;
 }
 
 /**
@@ -114,8 +111,7 @@ InputType Menu::GetInputType() const {
  * @return menu title
  */
 string Menu::GetTitle() const {
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
-    return std::string();
+    return _menuTitle;
 }
 
 /**
