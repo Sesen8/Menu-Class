@@ -9,6 +9,8 @@
 
 #include "menu.h"
 
+using std::endl;
+
 /**
  * The Menu constructor. Notice there is no default constructor. Notice that three streams can be sent to this
  * constructor, they will set _output, _input and _errorStream respectively. When you want to output something to
@@ -53,7 +55,7 @@ size_t Menu::MaxMenuLength() const {
 
     for (size_t i = 0; i < _numberOfOptions; ++i){
         MenuElement currElement = _menuElements[i];
-        size_t length = currElement.GetMenuText().size() + currElement.GetSelectionOption().size();
+        size_t length = currElement.GetMenuText().size() + currElement.GetSelectionOption().size()+1;
 
         if (length > maxLength ){
             maxLength = length;
@@ -195,5 +197,73 @@ int Menu::AddSeparator(unsigned int separatorPosition) {
 int Menu::Run() const {
 // --------> YOU NEED TO IMPLEMENT THIS METHOD
 // This method is the driver of your class!
+
+    _output << _menuTitle << endl;
+
+    for ( int i = 0; i < _numberOfOptions; i++){
+        _output << _menuElements[i].ToString() << endl;
+    }
+
+    if (_inputType == INT){
+        _output << "99 Exit" << endl;
+    }
+
+    else {
+        _output << "Type E to Exit" << endl;
+    }
+
+
+
+    string input;
+
+    _input >> input;
+
+    if (_inputType == INT){
+        if (!isdigit(input.at(0))){
+            _errorStream << _errorMessage << endl;
+            return INPUT_ERROR;
+        }
+    }
+
+    if (_inputType == CHAR){
+        if (input.length() >= 2){
+            _errorStream << _errorMessage << endl;
+            return INPUT_ERROR;
+        }
+
+    }
+
+    for ( int i = 0; i < _numberOfOptions; i++){
+        if (_menuElements[i].GetSelectionOption() == input){
+            return i;
+        }
+
+    }
+
+    if (_inputType == INT && input == "99"){
+        return EXIT;
+    }
+
+    else if (_inputType != INT && input == "E"){
+        return EXIT;
+    }
+
+    _errorStream << _invalidMessage << endl;
+    return INVALID_INPUT;
+
+
+
+
+
+
+
+
+
+
+    //if(isdigit(_inputType) != string::npos){
+
+    //}
+
+
     return 0;
 }
