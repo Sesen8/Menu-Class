@@ -213,9 +213,7 @@ int Menu::Run() const {
     }
 
 
-
     string input;
-
     _input >> input;
 
     if (_inputType == INT){
@@ -230,14 +228,12 @@ int Menu::Run() const {
             _errorStream << _errorMessage << endl;
             return INPUT_ERROR;
         }
-
     }
 
     for ( int i = 0; i < _numberOfOptions; i++){
         if (_menuElements[i].GetSelectionOption() == input){
             return i;
         }
-
     }
 
     if (_inputType == INT && input == "99"){
@@ -251,19 +247,4 @@ int Menu::Run() const {
     _errorStream << _invalidMessage << endl;
     return INVALID_INPUT;
 
-
-
-
-
-
-
-
-
-
-    //if(isdigit(_inputType) != string::npos){
-
-    //}
-
-
-    return 0;
 }
