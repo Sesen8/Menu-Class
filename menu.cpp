@@ -1,9 +1,9 @@
 /**
  * Title:   Lab 3 - Menu class Implementation: menu.cpp
  *
- * Purpose: ** your purpose here **
+ * Purpose: Create and organize menu
  * Class:   CSC 2430 Winter 2022
- * Author:  ** your name here **
+ * Author:  Sesen Yonas
  */
 
 
