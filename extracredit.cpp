@@ -1,3 +1,10 @@
+/**
+ * Title:   Lab 3 - extracredit.cpp
+ *
+ * Purpose: Create and organize menu
+ * Class:   CSC 2430 Winter 2022
+ * Author:  Sesen Yonas
+ */
 
 #include <iostream>
 #include <iomanip>
@@ -31,16 +38,19 @@ int main(int argc, char* argv[]){
     MenuNew->AddSeparator(5);
     MenuNew->AddMenuOption(6,"5","Calculate Average");
 
-    int optionStorage;
+    int selectedOption;
     int sizeofArray = -1;
 
-    double* userArray = nullptr;
+    double* createdArray = nullptr;
     int option = 0;
 
-    while((optionStorage = MenuNew->Run()) != EXIT){
-        if (optionStorage == 0){
-            if(userArray != nullptr){
-                delete[] userArray;
+    while((selectedOption = MenuNew->Run()) != EXIT){
+
+
+        // checks if user selected 1, creates array
+        if (selectedOption == 0){
+            if(createdArray != nullptr){
+                delete[] createdArray;
                 cout << "The created array will be lost" << endl;
             }
             cout << "Please input the maximum capacity of the array: ";
@@ -50,16 +60,16 @@ int main(int argc, char* argv[]){
                 cout << "Please input the maximum capacity of the array: " << endl;
                 cin >> sizeofArray;
             }
-
-
-
-            userArray = new double[sizeofArray];
+            createdArray = new double[sizeofArray];
             cout << "Array Created Successfully" << endl;
             option = 0;
         }
 
-        if (optionStorage ==2){
-            if(userArray == nullptr){
+
+
+        // checks if user selected 2, adds numbers to array
+        if (selectedOption ==2){
+            if(createdArray == nullptr){
                 cout << "Need to create array first!" << endl;
                 continue;
             }
@@ -73,29 +83,33 @@ int main(int argc, char* argv[]){
             cin >> userAdd;
 
 
-            userArray[option] = userAdd;
+            createdArray[option] = userAdd;
             cout << "Number "<< userAdd<< " Added to Position "<<option<< " Successfully" << endl;
             option+=1;
         }
 
-        if(optionStorage ==3){
-            if(userArray == nullptr){
+
+        // checks if user selected 3, lists added numbers
+        if(selectedOption ==3){
+            if(createdArray == nullptr){
                 cout << "Need to create array first!" << endl;
                 continue;
             }
             cout << "Listing Numbers" << endl;
             for(int i =0; i<option; i++){
-                cout << i << " " << userArray[i] << endl;
+                cout << i << " " << createdArray[i] << endl;
             }
         }
 
-        if(optionStorage ==4){
-            if(userArray == nullptr){
+
+        // checks if user selected 4, removes selected number
+        if(selectedOption ==4){
+            if(createdArray == nullptr){
                 cout << "Need to create array first!" << endl;
                 continue;
             }
             for(int i =0; i<option; i++){
-                cout << i << " " << userArray[i] << endl;
+                cout << i << " " << createdArray[i] << endl;
             }
 
             cout <<"What is the position where you want to remove a number: ";
@@ -103,7 +117,7 @@ int main(int argc, char* argv[]){
             cin >> removePos;
             if (removePos >=0 && removePos < option){
                 for (int i = removePos; i<option-1; i++){
-                    userArray[i] = userArray[i+1];
+                    createdArray[i] = createdArray[i+1];
                 }
                 cout << "Number in Position 0 Removed Successfully" << endl;
                 option = option -1;
@@ -113,14 +127,17 @@ int main(int argc, char* argv[]){
             }
 
         }
-        if (optionStorage == 6){
-            if(userArray == nullptr){
+
+
+        // checks if user selected 5, calculates the average of array
+        if (selectedOption == 6){
+            if(createdArray == nullptr){
                 cout << "Need to create array first!" << endl;
                 continue;
             }
             double total = 0.0;
             for (int i = 0; i<option; i++){
-                total+=userArray[i];
+                total+=createdArray[i];
             }
             double average = total/option;
             cout << "The average is " << average << endl;
