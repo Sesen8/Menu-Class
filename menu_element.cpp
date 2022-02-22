@@ -42,7 +42,6 @@ MenuElement::MenuElement(size_t length, char separator){
         _isSeparator = true;
     }
 
-
 }
 /**
  * Sets isSeparator to true to remember that this item is an actual separator. Then the _menuText is going

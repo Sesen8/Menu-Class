@@ -3,4 +3,4 @@ project(Menu_Assignment)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Menu_Assignment tests.cpp menu.cpp menu.h menu_element.cpp menu_element.h)
+add_executable(Menu_Assignment extracredit.cpp menu.cpp menu.h menu_element.cpp menu_element.h)

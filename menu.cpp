@@ -28,9 +28,7 @@ Menu::Menu(int numberOfOptions, ostream &output, istream &input, ostream &errorS
     _input(input),
     _errorStream(errorStream){
 
-    // --------> YOU NEED TO IMPLEMENT THIS METHOD
-
-    // This method is incomplete, you still need to write some code here!
+    // -------->
     _menuElements = new MenuElement[numberOfOptions];
 
 
@@ -51,19 +49,19 @@ Menu::~Menu() {
  */
 size_t Menu::MaxMenuLength() const {
 
-    size_t maxLength = 0;
+    size_t maxMenLength = 0;
 
     for (size_t i = 0; i < _numberOfOptions; ++i){
         MenuElement currElement = _menuElements[i];
         size_t length = currElement.GetMenuText().size() + currElement.GetSelectionOption().size()+1;
 
-        if (length > maxLength ){
-            maxLength = length;
+        if (length > maxMenLength ){
+            maxMenLength = length;
         }
 
     }
 
-    return maxLength;
+    return maxMenLength;
 }
 
 /**
@@ -147,12 +145,11 @@ int Menu::AddMenuOption(unsigned int optionNumber, const string &displayOption, 
         return INVALID_MENU_INDEX;
     }
 
-    size_t pastSize = _menuElements[optionNumber].MenuElementWidth();
+    size_t menSize = _menuElements[optionNumber].MenuElementWidth();
 
     _menuElements[optionNumber].SetMenuElement(displayOption,menuOption);
 
-
-    if (pastSize <= 1){
+    if (menSize <= 1){
         return optionNumber;
     }
     return OVERWROTE_OPTION;
@@ -169,10 +166,10 @@ int Menu::AddSeparator(unsigned int separatorPosition) {
         return INVALID_MENU_INDEX;
     }
 
-    size_t pastSize = _menuElements[separatorPosition].MenuElementWidth();
+    size_t sepSize = _menuElements[separatorPosition].MenuElementWidth();
     _menuElements[separatorPosition].SetSeparator(MaxMenuLength(), '-');
 
-    if (pastSize <= 1){
+    if (sepSize <= 1){
         return separatorPosition;
 
     }
@@ -195,11 +192,9 @@ int Menu::AddSeparator(unsigned int separatorPosition) {
  * @return the slot where the option has been stored (see optionNumber in AddMenuOption), if there is an error it will return the error value as noted above.
  */
 int Menu::Run() const {
-// --------> YOU NEED TO IMPLEMENT THIS METHOD
-// This method is the driver of your class!
 
+    //outputs title and menu elements
     _output << _menuTitle << endl;
-
     for ( int i = 0; i < _numberOfOptions; i++){
         _output << _menuElements[i].ToString() << endl;
     }
@@ -212,10 +207,10 @@ int Menu::Run() const {
         _output << "Type E to Exit" << endl;
     }
 
-
     string input;
     _input >> input;
 
+    //checks if input type is an int and if first index is an int, if not returns error
     if (_inputType == INT){
         if (!isdigit(input.at(0))){
             _errorStream << _errorMessage << endl;
@@ -223,6 +218,7 @@ int Menu::Run() const {
         }
     }
 
+    //checks if input type is char and if length of input is less than two, if not returns error
     if (_inputType == CHAR){
         if (input.length() >= 2){
             _errorStream << _errorMessage << endl;
@@ -230,6 +226,7 @@ int Menu::Run() const {
         }
     }
 
+    //checks if option is already in menu
     for ( int i = 0; i < _numberOfOptions; i++){
         if (_menuElements[i].GetSelectionOption() == input){
             return i;

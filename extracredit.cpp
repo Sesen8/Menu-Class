@@ -14,7 +14,121 @@ using std::setprecision;
 
 int main(int argc, char* argv[]){
 
-    cout << "Finished the Program... Goodbye" << endl << endl;
+    Menu* MenuNew;
+
+    MenuNew = new Menu(7,cout,cin,cerr);
+
+    MenuNew->SetErrorMessage("- - > Unrecognized Input < - -");
+    MenuNew->SetInvalidOption("- - > Please Input One of the Given Choices < - -");
+    MenuNew->SetInputType(INT);
+    MenuNew->SetTitle("Working with Arrays");
+
+    MenuNew->AddMenuOption(0,"1","Set Size of the Array");
+    MenuNew->AddSeparator(1);
+    MenuNew->AddMenuOption(2,"2","Add Number to Array");
+    MenuNew->AddMenuOption(3,"3","List the Numbers");
+    MenuNew->AddMenuOption(4,"4","Remove a Number");
+    MenuNew->AddSeparator(5);
+    MenuNew->AddMenuOption(6,"5","Calculate Average");
+
+    int optionStorage;
+    int sizeofArray = -1;
+
+    double* userArray = nullptr;
+    int option = 0;
+
+    while((optionStorage = MenuNew->Run()) != EXIT){
+        if (optionStorage == 0){
+            if(userArray != nullptr){
+                delete[] userArray;
+                cout << "The created array will be lost" << endl;
+            }
+            cout << "Please input the maximum capacity of the array: ";
+            cin >> sizeofArray;
+
+            while(sizeofArray < 0){
+                cout << "Please input the maximum capacity of the array: " << endl;
+                cin >> sizeofArray;
+            }
+
+
+
+            userArray = new double[sizeofArray];
+            cout << "Array Created Successfully" << endl;
+            option = 0;
+        }
+
+        if (optionStorage ==2){
+            if(userArray == nullptr){
+                cout << "Need to create array first!" << endl;
+                continue;
+            }
+            double userAdd;
+            if(option >= sizeofArray){
+                cout <<"Array is full" << endl;
+                continue;
+            }
+            cout << "Adding Number to Array" << endl;
+            cout << "Please input the number you want to add: ";
+            cin >> userAdd;
+
+
+            userArray[option] = userAdd;
+            cout << "Number "<< userAdd<< " Added to Position "<<option<< " Successfully" << endl;
+            option+=1;
+        }
+
+        if(optionStorage ==3){
+            if(userArray == nullptr){
+                cout << "Need to create array first!" << endl;
+                continue;
+            }
+            cout << "Listing Numbers" << endl;
+            for(int i =0; i<option; i++){
+                cout << i << " " << userArray[i] << endl;
+            }
+        }
+
+        if(optionStorage ==4){
+            if(userArray == nullptr){
+                cout << "Need to create array first!" << endl;
+                continue;
+            }
+            for(int i =0; i<option; i++){
+                cout << i << " " << userArray[i] << endl;
+            }
+
+            cout <<"What is the position where you want to remove a number: ";
+            int removePos;
+            cin >> removePos;
+            if (removePos >=0 && removePos < option){
+                for (int i = removePos; i<option-1; i++){
+                    userArray[i] = userArray[i+1];
+                }
+                cout << "Number in Position 0 Removed Successfully" << endl;
+                option = option -1;
+            }
+            else {
+                cout << "Invalid Position" << endl;
+            }
+
+        }
+        if (optionStorage == 6){
+            if(userArray == nullptr){
+                cout << "Need to create array first!" << endl;
+                continue;
+            }
+            double total = 0.0;
+            for (int i = 0; i<option; i++){
+                total+=userArray[i];
+            }
+            double average = total/option;
+            cout << "The average is " << average << endl;
+        }
+
+
+    }
+    cout << "Finished the Program... Goodbye"<<endl<<endl;
     return 0;
 }
 
